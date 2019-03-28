@@ -124,7 +124,7 @@ COPY start-singleuser.sh /usr/local/bin/
 COPY jupyter_notebook_config.py /etc/jupyter/
 RUN fix-permissions /etc/jupyter/
 
-RUN echo "${NB_USER} ALL=NOPASSWD: ALL" >> /etc/sudoers && visudo -c
+RUN echo "${NB_USER} ALL=NOPASSWD: ALL" >> /etc/sudoers.d/${NB_USER} && chmod 0440 /etc/sudoers.d/${NB_USER} && visudo -c
 
 # Switch back to jovyan to avoid accidental container runs as root
 USER $NB_UID
